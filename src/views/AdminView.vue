@@ -2,4 +2,8 @@
   <div class="home">管理员可见</div>
 </template>
 
-<script lang="ts"></script>
+<script lang="ts">
+export default {
+  name: "AdminView",
+};
+</script>

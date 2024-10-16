@@ -7,6 +7,13 @@ import type { ApiRequestOptions } from './ApiRequestOptions';
 type Resolver<T> = (options: ApiRequestOptions) => Promise<T>;
 type Headers = Record<string, string>;
 
+// console.log("当前环境：" + process.env.NODE_ENV)
+
+const BASE_URL =
+  process.env.NODE_ENV === "production" ? "http://47.106.179.250:8804" : "http://localhost:8804";
+
+// console.log("请求地址：" + BASE_URL)
+
 export type OpenAPIConfig = {
     BASE: string;
     VERSION: string;
@@ -20,7 +27,7 @@ export type OpenAPIConfig = {
 };
 
 export const OpenAPI: OpenAPIConfig = {
-    BASE: 'http://localhost:8101',
+    BASE: BASE_URL,
     VERSION: '1.0',
     WITH_CREDENTIALS: true,
     CREDENTIALS: 'include',
