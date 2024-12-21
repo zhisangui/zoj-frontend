@@ -51,7 +51,7 @@
               <a-option>java</a-option>
               <a-option>cpp</a-option>
               <a-option>go</a-option>
-              <a-option>html</a-option>
+              <a-option>js</a-option>
             </a-select>
           </a-form-item>
         </a-form>

@@ -4,7 +4,7 @@
       <a-layout-header class="header">
         <a-space>
           <img src="../assets/oj-logo.png" class="logo" />
-          <div>Z OJ</div>
+          <div>ZOJ</div>
         </a-space>
       </a-layout-header>
       <a-layout-content class="content">

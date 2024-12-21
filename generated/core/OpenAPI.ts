@@ -10,7 +10,7 @@ type Headers = Record<string, string>;
 // console.log("当前环境：" + process.env.NODE_ENV)
 
 const BASE_URL =
-  process.env.NODE_ENV === "production" ? "http://47.106.179.250:8804" : "http://localhost:8804";
+  process.env.NODE_ENV === "production" ? "http://103.73.66.197:8804" : "http://localhost:8804";
 
 // console.log("请求地址：" + BASE_URL)
 

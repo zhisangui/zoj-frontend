@@ -80,6 +80,7 @@ import {
 import message from "@arco-design/web-vue/es/message";
 import { useRouter } from "vue-router";
 import moment from "moment";
+import { useStore } from "vuex";
 
 const tableRef = ref();
 
@@ -91,6 +92,7 @@ const searchParams = ref<QuestionSubmitQueryRequest>({
   pageSize: 10,
   current: 1,
 });
+const store = useStore();
 
 const loadData = async () => {
   const res = await QuestionControllerService.listQuestionVoByPageUsingPost({
@@ -102,7 +104,10 @@ const loadData = async () => {
     dataList.value = res.data.records;
     total.value = res.data.total;
   } else {
-    message.error("加载失败，" + res.message);
+    router.push({
+      path: "/user/login",
+      replace: true,
+    });
   }
 };
 

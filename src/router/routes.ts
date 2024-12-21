@@ -35,17 +35,17 @@ export const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/",
-    name: "浏览题目",
+    name: "题库",
     component: QuestionsView,
   },
   {
     path: "/question_submit",
-    name: "浏览题目提交",
+    name: "提交记录",
     component: QuestionSubmitView,
   },
   {
     path: "/add/question",
-    name: "创建题目",
+    name: "新增题目",
     component: AddQuestionView,
     meta: {
       access: ACCESS_ENUM.USER,
@@ -53,7 +53,7 @@ export const routes: Array<RouteRecordRaw> = [
   },
   {
     path: "/update/question",
-    name: "更新题目",
+    name: "修改题目",
     component: AddQuestionView,
     meta: {
       access: ACCESS_ENUM.ADMIN,

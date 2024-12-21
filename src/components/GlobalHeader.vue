@@ -23,7 +23,13 @@
     </a-col>
     <a-col flex="100px">
       <div>
-        {{ store.state.user?.loginUser?.userName ?? "未登录" }}
+        <a-dropdown @select="handleSelect">
+          <a-button>{{ userName }}</a-button>
+          <template #content>
+            <a-doption>{{ userName }}</a-doption>
+            <a-doption @click="doLogout">退出登录 </a-doption>
+          </template>
+        </a-dropdown>
       </div>
     </a-col>
   </a-row>
@@ -31,15 +37,19 @@
 
 <script setup lang="ts">
 import { routes } from "../router/routes";
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import checkAccess from "@/access/checkAccess";
 import ACCESS_ENUM from "@/access/accessEnum";
+import { UserControllerService } from "../../generated";
 
 const router = useRouter();
 const store = useStore();
 
+const userName = computed(
+  () => store.state.user?.loginUser?.userName ?? "未登录"
+);
 // 展示在菜单的路由数组
 const visibleRoutes = computed(() => {
   return routes.filter((item, index) => {
@@ -47,14 +57,34 @@ const visibleRoutes = computed(() => {
       return false;
     }
     // 根据权限过滤菜单
-    if (
-      !checkAccess(store.state.user.loginUser, item?.meta?.access as string)
-    ) {
-      return false;
-    }
-    return true;
+    return checkAccess(
+      store.state.user.loginUser,
+      item?.meta?.access as string
+    );
   });
 });
+
+const handleSelect = (v: any) => {
+  console.log(v);
+};
+
+const doLogout = async () => {
+  if (userName.value === "未登录") {
+    return;
+  }
+  const res = await UserControllerService.userLogoutUsingPost();
+  if (res?.code === 0) {
+    // 更新用户数据
+    store.commit("user/updateUser", { userName: "未登录" });
+    console.log("退出登录成功");
+    router.push({
+      path: "/user/login",
+      replace: true,
+    });
+  } else {
+    console.log("退出登录失败");
+  }
+};
 
 // 默认主页
 const selectedKeys = ref(["/"]);
@@ -68,7 +98,7 @@ console.log();
 
 setTimeout(() => {
   store.dispatch("user/getLoginUser", {
-    userName: "鱼皮管理员",
+    userName: "zsg_admin",
     userRole: ACCESS_ENUM.ADMIN,
   });
 }, 3000);
