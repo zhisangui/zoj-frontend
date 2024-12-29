@@ -34,7 +34,7 @@
       @page-change="onPageChange"
     >
       <template #createTime="{ record }">
-        {{ moment(record.createTime).format("YYYY-MM-DD") }}
+        {{ moment(record.createTime).format("YYYY-MM-DD HH:mm:ss") }}
       </template>
       <template #judgeRes="{ record }">
         <span v-if="record.judgeInfo?.message === 'AC'"
