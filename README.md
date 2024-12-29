@@ -1,5 +1,10 @@
 # zoj-frontend
 
+## Description
+
+
+
+
 ## Project setup
 ```
 yarn install
@@ -20,5 +25,6 @@ yarn build
 yarn lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Warning
+**You must change the address at which the request is sent to the backend**: 
+see [here](generated/core/OpenAPI.ts)
